@@ -1,34 +1,27 @@
 esphome:
-  name: canopy-test
-  friendly_name: Canopy test
-
-  libraries:
-    # Wire library is needed for the i2c protocol
-    - "Wire"
+  name: c6-test
+  friendly_name: c6 test
   on_boot: 
     then:
       # If you want to implement deep_sleep, uncomment the following line
       # - script.execute: deep_sleep_evaluation
 
 esp32:
-  board: esp32-c3-devkitm-1
+  board: esp32-c6-devkitc-1
   framework:
     type: esp-idf
-    version: recommended
 
 # Enable logging
 logger:
-  # level: DEBUG
-  # baud_rate: 0
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "auto-generated-key"
+    key: "gbshGw71O1RK28tHXogbVgpXOtvzwCLx49C8xrHSB1g="
 
 ota:
   - platform: esphome
-    password: "auto-generated-password"
+    password: "3bbb2990a38a94f28deb75aea97a0c07"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -36,8 +29,8 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Canopy-Test Fallback Hotspot"
-    password: "auto-generated-password"
+    ssid: "C6-Test Fallback Hotspot"
+    password: "9xtV1NKopkD2"
 
 captive_portal:
 
@@ -49,26 +42,46 @@ binary_sensor:
     id: disable_deep_sleep
     entity_id: input_boolean.disable_deep_sleep
 
-# Example configuration entry for Sprig-C3 board
 i2c:
-- id: bus_a
-  sda: 2
-  scl: 3
+  sda: 6
+  scl: 7
   scan: True
+  id: bus_a
 
 sensor:
-# This is the MAX17043 fuel gauge sensor configuration
+#   - platform: bmi160
+#     address: 0x68
+#     i2c_id: bus_a
+#     update_interval: 10s
+#     acceleration_x:
+#       name: "BMI160 Accel X"
+#     acceleration_y:
+#       name: "BMI160 Accel Y"
+#     acceleration_z:
+#       name: "BMI160 Accel z"
+#     gyroscope_x:
+#       name: "BMI160 Gyro X"
+#     gyroscope_y:
+#       name: "BMI160 Gyro Y"
+#     gyroscope_z:
+#       name: "BMI160 Gyro z"
+#     temperature:
+#       name: "BMI160 Temperature"
+
   - platform: max17043
     id: max17043_id
-    i2c_id: bus_a
     battery_voltage:
       name: "Battery Voltage"
-      accuracy_decimals: 1
     battery_level:
       name: "Battery"
-      accuracy_decimals: 0
-    update_interval: 1min
-
+  
+light:
+  - platform: esp32_rmt_led_strip
+    rgb_order: GRB
+    pin: 15
+    num_leds: 1
+    chipset: SK6812
+    name: "My Light"
 
 
 # This script sets the waiting time before going into sleep mode
@@ -84,12 +97,12 @@ script:
             binary_sensor.is_on: disable_deep_sleep
           then:
             - logger.log: 'Deep Sleep Disabled'
-            - deep_sleep.prevent: deep_sleep_1
+            - deep_sleep.prevent: deep_sleep_enabled
           else:
-            - deep_sleep.enter: deep_sleep_1
+            - deep_sleep.enter: deep_sleep_enabled
       - script.execute: deep_sleep_evaluation
 
-# Here, the deep sleep duration is declared
+# # Here, the deep sleep duration is declared
 deep_sleep:
-  id: deep_sleep_1
+  id: deep_sleep_enabled
   sleep_duration: 10min
