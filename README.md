@@ -69,7 +69,7 @@ You can get the assembled boards in my [Tindie](https://www.tindie.com/products/
 ## Certifications
 This project is certified by the [Open Source Hardware Association (OSHWA)](https://certification.oshwa.org/gr000011.html)
 
-<!-- <img src="PCB/Certifications/certification-mark-GR000008-stacked.png" alt="Open Source Hardware Association Certification" width="300" allign="left"/> -->
+<img src="PCB/Certifications/certification-mark-GR000011-stacked.png" alt="Open Source Hardware Association Certification" width="300" allign="left"/>
 
 
 
