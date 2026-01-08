@@ -2,7 +2,7 @@
 **Sprig-C6** is the latest addition to the [SprigStack ecosystem](https://sprig-labs.com/) of boards designed to simplify the development of DIY IoT devices. Sprig-C6 is build around the [ESP32-C6](https://www.espressif.com/en/products/socs/esp32-c6) microcontroller which supports WiFi6, BLE, as well as Zigbee, Matter, and Thread. Creating a Home Assistant device using the Sprig is as simple as it gets: 
 1. Plug it to a PC via a USB-C cable while pressing the BOOT button (required only the first time).
 2. Flash the firmware using the ESPHome plugin.
-3. Copy the provided `.yaml` [configuration](Home%Assistant%Setup/c6-config.yaml) onto your ESPHome's `.yaml`
+3. Copy the provided `.yaml` [configuration](Home%20Assistant%20Setup/c6-config.yaml) onto your ESPHome's `.yaml`
 
 | <img src="PCB/DSCF2196.jpg" alt="Photo 1" width="600"/> | <img src="PCB/DSCF2197.jpg" alt="Photo 2" width="600"/> |
 |-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -21,6 +21,13 @@
 * "Charging" and "Done charging" states indicated by 2 LEDs.
 * ON-OFF Switch on the battery terminals.
 * Breadboard-compatible pin headers breaking out all the pins of ESP32-C6, as well as the USB, battery, and regulated 3.3V.
+
+#### I2C Pins of the Sprig-C3 board
+| Function | Pin No |
+|----------|--------|
+| SDA      | 6      |
+| SCL      | 7      |
+
 
 ### Tests
 * Battery over-discharge cutoff: 2.8V
@@ -47,20 +54,11 @@
 4. Wait for the upload to finish, and restart the Sprig-C3. Now, every time you power on the device, it should connect to your WiFi automatically.
 5. Last step, is to go to your Home Assistant settings, and Configure your newly discovered device (assuming it is powered on and visible on the network).
 
-#### Video Tutorial:
-[https://youtu.be/UaIIV4CaRA4
-](https://youtu.be/UaIIV4CaRA4)
-
+#### Video Tutorial: [Fist Home Assistant Setup](https://youtu.be/UaIIV4CaRA4)
 
 
 ### Battery Capacity Measurement
-The Sprig-C6 board features the MAX17048 battery capacity measurement IC connected to the respective I2C pins. In the `c6-config.yaml` provided [here](Home%Assistant%Setup/c6-config.yaml), there is a sample code for proper communication with the ic. No further setup required.
-
-#### I2C Pins of the Sprig-C3 board
-| Function | Pin No |
-|----------|--------|
-| SDA      | 6      |
-| SCL      | 7      |
+The Sprig-C6 board features the MAX17048 battery capacity measurement IC connected to the respective I2C pins. In the `c6-config.yaml` provided [here](Home%20Assistant%20Setup/c6-config.yaml), there is a sample code for proper communication with the ic. No further setup required.
 
 
 ## Availability
